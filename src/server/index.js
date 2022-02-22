@@ -28,6 +28,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 
 app.use("/users", userRouter);
+app.use("/items", itemRouter);
 
 app.use(notFoundError);
 app.use(generalError);
