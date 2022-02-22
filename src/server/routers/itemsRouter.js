@@ -3,6 +3,6 @@ const listItems = require("../controllers/itemsControllers");
 
 const router = express.Router();
 
-router.post("/list", listItems);
+router.get("/list", listItems);
 
 module.exports = router;
