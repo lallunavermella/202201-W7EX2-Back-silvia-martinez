@@ -2,6 +2,24 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../database/models/User");
 
+const registerUser = async (req, res, next) => {
+  const newUser = req.body;
+  try {
+    const user = await User.create(newUser);
+
+    if (user) {
+      res.status(201).json(user);
+    } else {
+      const error = new Error("User not found");
+      error.code = 404;
+      next(error);
+    }
+  } catch (error) {
+    error.code = 400;
+    next(error);
+  }
+};
+
 const loginUser = async (req, res, next) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
@@ -26,4 +44,4 @@ const loginUser = async (req, res, next) => {
   return res.json({ token });
 };
 
-module.exports = loginUser;
+module.exports = { loginUser, registerUser };
