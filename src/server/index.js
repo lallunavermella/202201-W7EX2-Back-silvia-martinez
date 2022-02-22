@@ -22,6 +22,8 @@ const startServer = (port) =>
     });
   });
 
+app.use(express.json());
+
 app.use(morgan("dev"));
 app.use(helmet());
 
